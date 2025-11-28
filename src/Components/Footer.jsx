@@ -1,5 +1,4 @@
-/ src/components/Footer.jsx
-import React from 'react';
+  import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -8,7 +7,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-info">
-            <img src="src\images\IMG.png" alt="CredySmartJDL" className="footer-logo" />
+            <img src="src\img\IMG (1).png" alt="CredySmartJDL" className="footer-logo" />
             <p>Confianza, transparencia y soluciones financieras a tu medida.</p>
           </div>
           <div className="footer-links">

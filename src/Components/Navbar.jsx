@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <div className="container_CS">
-          <img src="src\images\IMG(1).png" alt="CredySmartJDL" className="logo-img" />
+          <img src="src\img\IMG (1).png" alt="CredySmartJDL" className="logo-img" />
           CredySmartJDL
         </div>
         <button
