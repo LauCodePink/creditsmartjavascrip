@@ -1,16 +1,64 @@
-# React + Vite
+CredySmartJDL – Simulador de Créditos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Proyecto académico desarrollado como parte del curso de Desarrollo de Software
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Nombre de los estudiante
+Laura Valentina Maldonado Baquero     
+Julian Andres Espinosa   
+David Velez Vanegas
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Descripción breve del proyecto
 
-## Expanding the ESLint configuration
+**CredySmartJDL** es una aplicación web que permite a los usuarios **explorar, comparar y solicitar créditos** de forma intuitiva y segura. El sistema ofrece:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Visualización de diferentes tipos de crédito (libre inversión, vehículos, educativo, empresarial, vivienda y consumo).
+- **Simulador interactivo** con filtros por nombre, rango de monto y tasa de interés.
+- **Formulario de solicitud** con cálculo automático de la cuota mensual.
+- Diseño responsivo y experiencia de usuario optimizada.
+
+Este proyecto fue desarrollado como parte de un curso de desarrollo web, aplicando buenas prácticas de React, gestión de estado y diseño profesional.
+
+---
+
+##  Tecnologías utilizadas
+
+- **React** (con Vite)
+- **React Router DOM** – Navegación entre páginas
+- **JavaScript**
+- **HTML5 y CSS3** 
+- **Bootstrap 5** – Para componentes responsivos (navbar hamburguesa)
+- **SweetAlert2** – Notificaciones de usuario
+- **Vite** – Entorno de desarrollo rápido
+
+---
+
+## Instrucciones de instalación
+
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/tu-usuario/credysmart-jdl.git
+   cd credysmart-jdl
+
+  2. **Instala las dependencias:**
+     ```bash
+     npm install
+     ```
+
+  3. **Inicia el servidor de desarrollo:**
+     ```bash
+     npm run dev
+     ```
+
+     > Esto iniciará un servidor de desarrollo normalmente en el puerto 5173.
+
+## Capturas de pantalla
+####  Página principal (index.html)
+![Página de inicio - Catálogo de créditos](src\img\image.png)
+
+####  Página de búsqueda (Simulador.html)
+![Página de búsqueda con filtros](src\img\img2.png)
+
+####  Página de solicitud (Solicitud.html)
+![Formulario de solicitud de crédito](src\img\img3.png)
