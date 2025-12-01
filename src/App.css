@@ -13,7 +13,7 @@
 
 body {
     font-family: 'ZenSerif', Verdana, Geneva, Tahoma, sans-serif;
-    background-color: #e0e9ee;
+    background-color: #d8e7ed;
     color: #2A3132;
     line-height: 1.6;
 }
@@ -27,7 +27,7 @@ body {
 
 /* ===== NAVBAR ===== */
 .navbar {
-    background-color: #000000;
+    background-color: #4a7d97 !important;
     padding: 1rem 0;
     box-shadow: 0 2px 6px rgba(42, 49, 50, 0.1);
     margin-bottom: 1.5rem;

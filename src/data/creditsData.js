@@ -1,4 +1,3 @@
-// src/data/creditsData.js
 export const creditOffers = [
   {
     id: 1,

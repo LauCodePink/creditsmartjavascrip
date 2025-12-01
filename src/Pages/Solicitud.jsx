@@ -1,4 +1,3 @@
-// src/pages/Request.jsx
 import React, { useState } from 'react';
 import { creditOffers } from '../data/creditsData';
 import Swal from 'sweetalert2';
@@ -59,7 +58,7 @@ const Request = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Mostrar mensaje de éxito con SweetAlert2
+    // Mensaje de éxito con SweetAlert
     Swal.fire({
       title: "¡Solicitud Enviada!",
       text: "Gracias por confiar en CreditSmart. En menos de 24 horas recibirás una respuesta.",
@@ -68,7 +67,7 @@ const Request = () => {
       draggable: true
     });
 
-    // Limpiar el formulario
+    // Limpiesa del formulario
     setFormData({
       fullName: '',
       idNumber: '',

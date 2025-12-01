@@ -1,11 +1,10 @@
-// src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Home from './Pages/Home';
 import Simulator from './Pages/Simulador';
-import Request from './Pages/Request';
+import Request from './Pages/Solicitud';
 import './App.css';
 
 function App() {

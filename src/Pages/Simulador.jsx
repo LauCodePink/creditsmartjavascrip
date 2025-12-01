@@ -1,4 +1,3 @@
-// src/pages/Simulator.jsx
 import React, { useState, useMemo } from 'react';
 import CreditCard from '../Components/CreditCard';
 import { creditOffers } from '../data/creditsData';
@@ -8,13 +7,13 @@ const Simulator = () => {
   const [amountFilter, setAmountFilter] = useState('');
   const [interestFilter, setInterestFilter] = useState('');
 
-  // Filtrado en tiempo real
+  // Filtrado
   const filteredCredits = useMemo(() => {
     return creditOffers.filter(credit => {
-      // 1. Búsqueda por nombre
+      // Búsqueda por nombre
       const matchesName = credit.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-      // 2. Filtro por rango de monto
+      //  Filtro por rango de monto
       let matchesAmount = true;
       if (amountFilter) {
         if (amountFilter === '1M-10M') matchesAmount = credit.maxAmount >= 1000000 && credit.minAmount <= 10000000;
@@ -23,7 +22,7 @@ const Simulator = () => {
         else if (amountFilter === '80M+') matchesAmount = credit.minAmount >= 80000000;
       }
 
-      // 3. Filtro por tasa de interés EXACTA (como en tu HTML)
+      // Filtro por tasa de interes
       let matchesInterest = true;
       if (interestFilter) {
         matchesInterest = credit.interest === parseFloat(interestFilter);
@@ -39,15 +38,14 @@ const Simulator = () => {
     setInterestFilter('');
   };
 
-  // El botón "Buscar Crédito" puede usarse, aunque el filtrado ya es en tiempo real
+  // Boton buscar Credito
   const handleSearch = (e) => {
-    e.preventDefault(); // si lo pones dentro de un <form>
-    // No es necesario hacer nada: ya está filtrando
+    e.preventDefault();
   };
 
   return (
     <main className="container">
-      {/* SECCIÓN DE BÚSQUEDA */}
+      {}
       <section className="search-section">
         <h2 className="search-title">Buscar Crédito</h2>
         <div className="search-container">
@@ -95,7 +93,7 @@ const Simulator = () => {
           </div>
         </div>
 
-        {/* Botones: Limpiar + Buscar */}
+        {/* Botones */}
         <div className="search-buttons">
           <button className="btn-clear" onClick={handleClearFilters}>
             Limpiar Filtros
@@ -106,7 +104,7 @@ const Simulator = () => {
         </div>
       </section>
 
-      {/* RESULTADOS */}
+      {/* Resultados */}
       <section className="credits-section">
         <h3>Resultados de la búsqueda</h3>
         {filteredCredits.length === 0 ? (
