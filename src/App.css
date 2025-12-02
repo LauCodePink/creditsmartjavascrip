@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: 'ZenSerif';
-    src: url('/fonts/ZEN-SERIF-TTF-Regular.ttf') format('truetype');
+    src: url('../src/fonts/DOC-20251104-WA0002.ttf');
     font-weight: normal;
     font-style: normal;
 }
