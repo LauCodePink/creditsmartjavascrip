@@ -1,5 +1,7 @@
+// src/pages/Request.jsx
 import React, { useState } from 'react';
-import { creditOffers } from '../data/creditsData';
+import { db } from '../firebase/config.js';
+import { collection, addDoc } from 'firebase/firestore';
 import Swal from 'sweetalert2';
 
 const Request = () => {
@@ -19,20 +21,20 @@ const Request = () => {
 
   const [monthlyPayment, setMonthlyPayment] = useState(0);
 
+  // Tasas fijas (no dependen de Firestore)
   const creditTypeMap = {
-    libre: "Crédito de Libre Inversión",
-    vehiculo: "Crédito de Vehículos",
-    educativo: "Crédito Educativo",
-    empresarial: "Crédito Empresarial",
-    vivienda: "Crédito de Vivienda",
-    consumo: "Crédito de Consumo"
+    libre: { name: "Crédito de Libre Inversión", interest: 1.5 },
+    vehiculo: { name: "Crédito de Vehículos", interest: 2.0 },
+    educativo: { name: "Crédito Educativo", interest: 0.5 },
+    empresarial: { name: "Crédito Empresarial", interest: 1.9 },
+    vivienda: { name: "Crédito de Vivienda", interest: 1.0 },
+    consumo: { name: "Crédito de Consumo", interest: 1.8 }
   };
 
   const calculatePayment = (amount, months, rate) => {
     if (!amount || !months || !rate) return 0;
     const r = rate / 100;
-    const payment = (amount * r) / (1 - Math.pow(1 + r, -months));
-    return Math.round(payment);
+    return Math.round((amount * r) / (1 - Math.pow(1 + r, -months)));
   };
 
   const handleInputChange = (e) => {
@@ -45,43 +47,64 @@ const Request = () => {
       const creditType = name === 'creditType' ? value : formData.creditType;
 
       if (creditType && amount && months) {
-        const creditName = creditTypeMap[creditType];
-        const credit = creditOffers.find(c => c.name === creditName);
+        const credit = creditTypeMap[creditType];
         if (credit) {
-          const payment = calculatePayment(amount, months, credit.interest);
-          setMonthlyPayment(payment);
+          setMonthlyPayment(calculatePayment(amount, months, credit.interest));
         }
       }
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Mensaje de éxito con SweetAlert
-    Swal.fire({
-      title: "¡Solicitud Enviada!",
-      text: "Gracias por confiar en CreditSmart. En menos de 24 horas recibirás una respuesta.",
-      icon: "success",
-      confirmButtonText: "Aceptar",
-      draggable: true
-    });
+    // Validación de campos obligatorios
+    const requiredFields = [
+      'fullName', 'idNumber', 'email', 'phone', 'companyName',
+      'jobTitle', 'monthlyIncome', 'creditType', 'amountRequested',
+      'termMonths', 'creditPurpose'
+    ];
 
-    // Limpiesa del formulario
-    setFormData({
-      fullName: '',
-      idNumber: '',
-      email: '',
-      phone: '',
-      companyName: '',
-      jobTitle: '',
-      monthlyIncome: '',
-      creditType: '',
-      amountRequested: '',
-      termMonths: '',
-      creditPurpose: ''
-    });
-    setMonthlyPayment(0);
+    for (const field of requiredFields) {
+      if (!formData[field]?.toString().trim()) {
+        Swal.fire('Campos incompletos', `Por favor completa todos los campos obligatorios.`, 'warning');
+        return;
+      }
+    }
+
+    try {
+      // Guardar en Firestore
+      const docRef = await addDoc(collection(db, 'requests'), {
+        ...formData,
+        monthlyIncome: Number(formData.monthlyIncome),
+        amountRequested: Number(formData.amountRequested),
+        termMonths: Number(formData.termMonths),
+        createdAt: new Date(),
+        status: 'pendiente'
+      });
+
+      Swal.fire('¡Éxito!', 'Solicitud enviada correctamente.', 'success');
+
+      // Limpiar formulario
+      setFormData({
+        fullName: '',
+        idNumber: '',
+        email: '',
+        phone: '',
+        companyName: '',
+        jobTitle: '',
+        monthlyIncome: '',
+        creditType: '',
+        amountRequested: '',
+        termMonths: '',
+        creditPurpose: ''
+      });
+      setMonthlyPayment(0);
+
+    } catch (error) {
+      console.error('Error al guardar solicitud:', error);
+      Swal.fire('Error', 'No se pudo enviar la solicitud. Verifica tu conexión.', 'error');
+    }
   };
 
   return (
@@ -310,4 +333,4 @@ const Request = () => {
   );
 };
 
-export default Request
+export default Request;

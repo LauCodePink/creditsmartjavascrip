@@ -1,19 +1,21 @@
+// src/pages/Simulator.jsx
 import React, { useState, useMemo } from 'react';
 import CreditCard from '../Components/CreditCard';
-import { creditOffers } from '../data/creditsData';
+import { useCredits } from '../hooks/useCredits'; // 👈 Mismo hook
 
 const Simulator = () => {
+  const { credits: allCredits, loading, error } = useCredits(); // Renombramos a allCredits
   const [searchTerm, setSearchTerm] = useState('');
   const [amountFilter, setAmountFilter] = useState('');
   const [interestFilter, setInterestFilter] = useState('');
 
-  // Filtrado
+  // Filtrado en tiempo real
   const filteredCredits = useMemo(() => {
-    return creditOffers.filter(credit => {
-      // Búsqueda por nombre
+    if (loading || error) return [];
+    
+    return allCredits.filter(credit => {
       const matchesName = credit.name.toLowerCase().includes(searchTerm.toLowerCase());
-
-      //  Filtro por rango de monto
+      
       let matchesAmount = true;
       if (amountFilter) {
         if (amountFilter === '1M-10M') matchesAmount = credit.maxAmount >= 1000000 && credit.minAmount <= 10000000;
@@ -22,7 +24,6 @@ const Simulator = () => {
         else if (amountFilter === '80M+') matchesAmount = credit.minAmount >= 80000000;
       }
 
-      // Filtro por tasa de interes
       let matchesInterest = true;
       if (interestFilter) {
         matchesInterest = credit.interest === parseFloat(interestFilter);
@@ -30,7 +31,7 @@ const Simulator = () => {
 
       return matchesName && matchesAmount && matchesInterest;
     });
-  }, [searchTerm, amountFilter, interestFilter]);
+  }, [searchTerm, amountFilter, interestFilter, allCredits, loading, error]);
 
   const handleClearFilters = () => {
     setSearchTerm('');
@@ -38,14 +39,30 @@ const Simulator = () => {
     setInterestFilter('');
   };
 
-  // Boton buscar Credito
-  const handleSearch = (e) => {
-    e.preventDefault();
-  };
+  if (loading) {
+    return (
+      <main className="container">
+        <section className="search-section text-center py-4">
+          <h2 className="search-title">Cargando créditos...</h2>
+        </section>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="container">
+        <section className="search-section text-center py-4 text-danger">
+          <h2 className="search-title">{error}</h2>
+          <p>Recarga la página para intentar de nuevo.</p>
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className="container">
-      {}
+      {/* SECCIÓN DE BÚSQUEDA */}
       <section className="search-section">
         <h2 className="search-title">Buscar Crédito</h2>
         <div className="search-container">
@@ -93,18 +110,14 @@ const Simulator = () => {
           </div>
         </div>
 
-        {/* Botones */}
         <div className="search-buttons">
           <button className="btn-clear" onClick={handleClearFilters}>
             Limpiar Filtros
           </button>
-          <button className="btn-search" onClick={handleSearch}>
-            Buscar Crédito
-          </button>
         </div>
       </section>
 
-      {/* Resultados */}
+      {/* RESULTADOS */}
       <section className="credits-section">
         <h3>Resultados de la búsqueda</h3>
         {filteredCredits.length === 0 ? (
@@ -121,4 +134,4 @@ const Simulator = () => {
   );
 };
 
-export default Simulator
+export default Simulator;

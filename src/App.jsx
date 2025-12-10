@@ -5,6 +5,7 @@ import Footer from './Components/Footer';
 import Home from './Pages/Home';
 import Simulator from './Pages/Simulador';
 import Request from './Pages/Solicitud';
+import MyRequests from './Pages/MisSolicitudes';
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/simulador" element={<Simulator />} />
           <Route path="/solicitud" element={<Request />} />
+          <Route path="/MisSolicitudes" element={<MyRequests />} />
         </Routes>
         <Footer />
       </div>

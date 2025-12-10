@@ -32,6 +32,10 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/solicitud">Solicitar crédito</Link>
             </li>
+            <li className="nav-item active">
+              <Link className="nav-link" to="/MisSolicitudes">Mis Solicitudes</Link>
+            </li>
+            
           </ul>
         </div>
       </div>
