@@ -80,7 +80,6 @@ const Request = () => {
         amountRequested: Number(formData.amountRequested),
         termMonths: Number(formData.termMonths),
         createdAt: new Date(),
-        status: 'pendiente'
       });
 
       Swal.fire('¡Éxito!', 'Solicitud enviada correctamente.', 'success');

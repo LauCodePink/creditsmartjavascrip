@@ -1,15 +1,14 @@
-// src/pages/Simulator.jsx
 import React, { useState, useMemo } from 'react';
 import CreditCard from '../Components/CreditCard';
-import { useCredits } from '../hooks/useCredits'; // 👈 Mismo hook
+import { useCredits } from '../hooks/useCredits'; 
 
 const Simulator = () => {
-  const { credits: allCredits, loading, error } = useCredits(); // Renombramos a allCredits
+  const { credits: allCredits, loading, error } = useCredits(); 
   const [searchTerm, setSearchTerm] = useState('');
   const [amountFilter, setAmountFilter] = useState('');
   const [interestFilter, setInterestFilter] = useState('');
 
-  // Filtrado en tiempo real
+  // Filtrado
   const filteredCredits = useMemo(() => {
     if (loading || error) return [];
     
@@ -62,7 +61,6 @@ const Simulator = () => {
 
   return (
     <main className="container">
-      {/* SECCIÓN DE BÚSQUEDA */}
       <section className="search-section">
         <h2 className="search-title">Buscar Crédito</h2>
         <div className="search-container">
@@ -117,7 +115,6 @@ const Simulator = () => {
         </div>
       </section>
 
-      {/* RESULTADOS */}
       <section className="credits-section">
         <h3>Resultados de la búsqueda</h3>
         {filteredCredits.length === 0 ? (
