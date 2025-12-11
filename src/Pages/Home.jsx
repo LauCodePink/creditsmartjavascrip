@@ -41,7 +41,7 @@ const Home = () => {
               <CreditCard key={credit.id} credit={credit} />
             ))
           ) : (
-            <p className="text-center">No hay créditos disponibles.</p>
+            <p className="text-center">No hay créditos disponibles, revisa tu conexión o intenta mas tarde.</p>
           )}
         </div>
       </section>
